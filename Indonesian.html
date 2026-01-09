@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>G2 | Pre-Order</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #ff7e5f;
+            --dark: #2d3436;
+            --bg: #fffcf9;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 40px 30px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.3);
+            text-align: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin: 0;
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            color: #a0a0a0;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            margin-left: 5px;
+            color: var(--dark);
+        }
+
+        input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #f0f0f0;
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+            background: #fdfdfd;
+        }
+
+        input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(255, 126, 95, 0.1);
+        }
+
+        button {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(255, 126, 95, 0.2);
+            transition: transform 0.2s active;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        #status {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            min-height: 1.2em;
+        }
+
+        .success-card {
+            display: none;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="form-container">
+    <h1 class="logo">G2</h1>
+    <p class="tagline">Puding Roti Labu Kuning</p>
+    
+    <div id="order-form">
+        <div class="input-group">
+            <label>NAMA LENGKAP</label>
+            <input type="text" id="name" placeholder="Nama Anda" autocomplete="name">
+        </div>
+        
+        <div class="input-group">
+            <label>NOMOR WHATSAPP</label>
+            <input type="tel" id="phone" placeholder="+62 000-0000-0000">
+        </div>
+
+        <button onclick="sendOrder()">Pre Order Sekarang!</button>
+        <div id="status"></div>
+    </div>
+    <h2 class="tagline">25% Off For Pre-Order!</h2>
+    <h2 class="tagline">Rp10000❌ Rp7500✅</h2>
+
+    <div id="success-view" class="success-card">
+        <h2 style="color: var(--accent)">Pesanan Diterima!</h2>
+        <p>Kode pesanan Anda:</p>
+        <div id="final-code" style="font-size: 1.5rem; font-weight: 700; letter-spacing: 2px; margin: 20px 0;"></div>
+        <p style="font-size: 0.8rem; color: #888;">Mohon simpan kode ini untuk pengambilan.</p>
+    </div>
+</div>
+
+<script>
+    async function sendOrder() {
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1458643003072839682/8-MG5tkL4k9dzZcE2jTNP7XmR9b5Pa4Jaa4FMHAMqzq5NN7i9eBRnrTwhoAs7cewr-hG";
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const status = document.getElementById('status');
+
+        if (!name || !phone) {
+            status.innerText = "Mohon lengkapi semua data";
+            status.style.color = "#e74c3c";
+            return;
+        }
+
+        const code = Math.floor(1000000000 + Math.random() * 9000000000);
+
+        const data = {
+            embeds: [{
+                title: "Pesanan Pre-Order G2 Baru",
+                color: 16744031,
+                fields: [
+                    { name: "Nama Pelanggan", value: name, inline: true },
+                    { name: "Kontak/WA", value: phone, inline: true },
+                    { name: "Kode Pesanan", value: code.toString() }
+                ],
+                footer: { text: "Dipesan pada" },
+                timestamp: new Date()
+            }]
+        };
+
+        try {
+            status.innerText = "Mengirim pesanan...";
+            const response = await fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                document.getElementById('order-form').style.display = 'none';
+                document.getElementById('success-view').style.display = 'block';
+                document.getElementById('final-code').innerText = code;
+            } else {
+                throw new Error();
+            }
+        } catch (e) {
+            status.innerText = "Terjadi kesalahan. Silakan coba lagi.";
+            status.style.color = "#e74c3c";
+        }
+    }
+</script>
+
+</body>
+</html>

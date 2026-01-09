@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>G2 | Language</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #ff7e5f;
+            --dark: #2d3436;
+            --bg: #fffcf9;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 50px 30px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.3);
+            text-align: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin: 0;
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            color: #a0a0a0;
+        }
+
+        .lang-btn {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            margin-bottom: 15px;
+            text-decoration: none;
+            background: white;
+            color: var(--dark);
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn:active {
+            transform: scale(0.96);
+            background: #fffcf9;
+            border-color: var(--accent);
+        }
+
+        .lang-btn span {
+            font-size: 0.9rem;
+            font-weight: 400;
+            display: block;
+            color: #888;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="logo">G2</h1>
+    <p class="tagline">Select Language</p>
+    
+    <a href="English.html" class="lang-btn">
+        English
+        <span>Order in English</span>
+    </a>
+    
+    <a href="Indonesian.html" class="lang-btn">
+        Bahasa Indonesia
+        <span>Pesan dalam Bahasa Indonesia</span>
+    </a>
+</div>
+
+</body>
+</html>
